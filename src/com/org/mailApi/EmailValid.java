@@ -6,7 +6,7 @@ public class EmailValid {
 	{
 		String[] to={mailid};
 	try{	
-		if(EmailSender.sendMail("imduke021@gmail.com", "@banking021",msg,to))
+		if(EmailSender.sendMail("sender's email id", "password",msg,to))
 		{
 			System.out.println("email sent");
 		}
