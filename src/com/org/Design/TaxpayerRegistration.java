@@ -28,7 +28,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
 import com.org.Database.UserDatabase;
-import com.org.Database.UserRegistration;
+import com.org.Database.GstReturnDatabase;
+import com.org.mailApi.EmailValid;
 
 
 class AccountOpening extends JFrame
@@ -44,6 +45,7 @@ class AccountOpening extends JFrame
 	private final ButtonGroup sex = new ButtonGroup();
 	private JComboBox cbDay,cbMonth,cbYear,cBtype;
 	private String Csex;
+	private String Cmail,Cname,Cpassword;
 	private String Day[] = {"Day","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18",
 			"19","20","21","22","23","24","25","26","27","28","29","30","31"};
 	private String Month[] = {"Month","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"};
@@ -323,7 +325,7 @@ class AccountOpening extends JFrame
 	public void createNewUserObject()
 	{
 		
-		String Cname,Cdob,Cadd,Cphone,Cbusinesstype,Cadhar,Cpan,Cmail;
+		String Cname,Cdob,Cadd,Cphone,Cbusinesstype,Cadhar,Cpan;
 		
 		Cname = txtName.getText().trim();
        
@@ -343,7 +345,7 @@ class AccountOpening extends JFrame
 			Csex="Female";
 		}
 		//Csex = "Male";
-		String Cpassword =new String(txtPassword.getText());
+		Cpassword =new String(txtPassword.getText());
 		String CRpassword =new String(txtRpassword.getText());
 		Cadd = txtAddress.getText().trim();
 		Cphone = txtPhone.getText().trim();
@@ -382,7 +384,9 @@ class AccountOpening extends JFrame
 				   int con=JOptionPane.showConfirmDialog(this, "Are You Sure to  apply");
 	     		   if(con==JOptionPane.YES_OPTION)
 				       {
-				    	   
+	     			  String msg="Thankyou for registering.Your Password is :"+Cpassword+"";
+	     			   	EmailValid obj=new EmailValid();
+						 obj.Email(msg,Cmail);   
 					      JOptionPane.showMessageDialog(this, "Account successfully created..Your GISTIN no. is "+value);
 					      
 					      /*String message = "Thank you for registering ";
@@ -390,6 +394,7 @@ class AccountOpening extends JFrame
 				        	 
 				        	 EmailValid obj=new EmailValid();
 								obj.Email(message,c.getAccountNo());*/
+					      
 					      
 					      resetFrame();
 				       

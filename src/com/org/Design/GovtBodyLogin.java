@@ -7,10 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.org.Database.AdminDatabase;
+import com.org.Database.UserDatabase;
+
 import javax.swing.UIManager;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -61,7 +65,7 @@ class LoginGovt extends JFrame
 		
 		//setIconImage(Toolkit.getDefaultToolkit().getImage(GovtBodyLogin.class.getResource("/resources/boss (1).png")));
 		setTitle("GOVERNMENT BODY LOGIN");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(start.class.getResource("/resources/boss.png")));
+		//setIconImage(Toolkit.getDefaultToolkit().getImage(start.class.getResource("/resources/boss.png")));
 		addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
             	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -73,6 +77,7 @@ class LoginGovt extends JFrame
         );
 		setBounds(0, 0, 1378, 780);
 		AdminPage = new JPanel();
+		AdminPage.setVisible(true);
 		AdminPage.setBackground(new Color(176, 224, 230));
 		AdminPage.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(AdminPage);
@@ -130,7 +135,12 @@ class LoginGovt extends JFrame
 		
 		btnLogIn.addActionListener((e)->
 		{
-			//loginCheck();
+			try {
+				loginCheck();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		});
 
 		chckbxShowPassword = new JCheckBox("Show Password");
@@ -155,64 +165,22 @@ class LoginGovt extends JFrame
 		this.setVisible(true);
 	}
 
-	/*
-	public void loginCheck()
-	{
+
+
+	public void loginCheck() throws SQLException
+	{	
+		String pwd=new String(txtPassword.getPassword());
 		
-		loginIndex = searchId(textUserId.getText().trim());
-		
-        if(loginIndex >= 0)
-        {
-        	
-       	 ArrayList<ManagerDetails> userlist = ManagerDetailsFile.readDataFromFile();
-       	 
-       	 if((txtPassword.getText().trim()).equals(userlist.get(loginIndex).getManagerPassword()))
-       	 {
-       		 SwingUtilities.invokeLater(new Runnable()
-             {
-                 public void run()
-                 {
-                     new Managerframe(loginIndex);
-                     setvisibility();
-                 }
-             });
-       	 }
-       	 else 
-       		 JOptionPane.showMessageDialog(this, "INVALID PASSWORD");
-        }
-        else
-        {
-           JOptionPane.showMessageDialog(this, "INVALID ID");
-        }
+		new AdminDatabase(textUserId.getText(),pwd);
+	                    if(AdminDatabase.loginStatus==true)
+	                    {
+	                    	new government();
+	                    }
+	                    else{
+	     
+	                    	JOptionPane.showMessageDialog(this, "Invalid Credential");
+	                    }
 	}
-	public void setvisibility()
-	{
-		this.dispose();
-	}
-	public int searchId(String strId)
-	{
-		ArrayList<ManagerDetails> cList;
-		int f = -1;
-		try
-		{
-			cList=ManagerDetailsFile.readDataFromFile();
-			
-			for(int p=0; p<cList.size(); p++)
-			{
-				if(strId.equals(cList.get(p).getManagerId()))
-				{
-				   f = p;
-				   break;
-				}	
-			}
-			 
-			return(f);
-		}catch(Exception e)
-		{
-			System.out.println(e);
-			return(-2);
-		}
- 	}*/
 }
 
 

@@ -1,8 +1,5 @@
 package com.org.Design;
 
-
-
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -178,9 +175,7 @@ class LoginTaxpayers extends JFrame
 		new UserDatabase(textUserId.getText(),pwd);
 	                    if(UserDatabase.loginStatus==true)
 	                    {
-	                    	//opening new window managed by admin
-	                    	JOptionPane.showMessageDialog(this,"Login successfull");
-	                    	//UserDatabase.loginStatus=false;
+	                    	new User_dashboard();
 	                    }
 	                    else{
 	     

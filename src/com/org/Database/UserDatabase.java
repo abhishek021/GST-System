@@ -11,7 +11,8 @@ public class UserDatabase {
 
 	public static Boolean loginStatus=false;
 	public static void main(String[] args) throws SQLException {
-			//UserDatabase obj=new UserDatabase("852963741","password");	
+			UserDatabase obj=new UserDatabase("2945567725","user11");	
+			System.out.println(loginStatus);
 	/*try {
 			boolean test=addUser("123456789", "Shiwanjha", "789456123", "12/04/1996", "uit", "male", "abhishekpass", "personal", "456123456123", "4567896544","abc@gmail.com");
 		} catch (Exception e) {

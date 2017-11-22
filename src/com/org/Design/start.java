@@ -115,7 +115,7 @@ class start extends JFrame implements ActionListener
         
         administrator.addActionListener((e) ->
         {
-        	govtLogin();
+        	new LoginGovt();
        
          }
        );
